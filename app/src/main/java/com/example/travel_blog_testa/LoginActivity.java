@@ -1,6 +1,7 @@
 package com.example.travel_blog_testa;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
+    //error log when credentials dont equal admin
     private void showErrorDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Login Failed")
@@ -118,8 +119,17 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void performLogin() {
+        textUsernameLayout.setEnabled(false);
+        textPasswordInput.setEnabled(false);
+        //when creds == admin, login button is hidden, and progressbar is shown
         loginButton.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
+
+        //Hnadler is an object which is tied to the looper of the thread in which its been created
+        Handler handler = new Handler();
+        handler.postDelayed(() -> {
+            //code
+        }, 2000);
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.travel_blog_testa;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -128,8 +129,17 @@ public class LoginActivity extends AppCompatActivity {
         //Hnadler is an object which is tied to the looper of the thread in which its been created
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            //code
+            startMainActivity();
+            finish(); // makes sure when back is pressed, progressBar is gone
         }, 2000);
+    }
+
+    //method that starts main activity
+    //package content can be "this", since the Activity class implements the Context interface\
+    //***Intent MUST be used to launch to another screen
+    private void startMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 

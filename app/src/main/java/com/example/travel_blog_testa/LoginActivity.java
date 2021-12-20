@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout textUsernameLayout;
     private TextInputLayout textPasswordInput;
     private Button loginButton;
+    private ProgressBar progressBar;
 
     @Override //added later
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         textUsernameLayout = findViewById(R.id.textUsernameLayout);
         textPasswordInput = findViewById(R.id.textPasswordInput);
         loginButton = findViewById(R.id.loginButton);
+        progressBar = findViewById(R.id.progressBar);
 
 
         loginButton = findViewById(R.id.loginButton);
@@ -95,7 +98,9 @@ public class LoginActivity extends AppCompatActivity {
         } else if (!username.equals("admin") && !password.equals("admin")) {
 
             showErrorDialog();
-
+        }
+        else {
+            performLogin();
         }
 
     }
@@ -109,6 +114,12 @@ public class LoginActivity extends AppCompatActivity {
                 .setMessage("Username or password is not correct. Please try again.")
                 .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
                 .show();
+    }
+
+
+    private void performLogin() {
+        loginButton.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
 

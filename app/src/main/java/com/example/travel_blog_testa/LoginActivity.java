@@ -1,10 +1,13 @@
 package com.example.travel_blog_testa;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -15,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout textPasswordInput;
     private Button loginButton;
 
+    @Override //added later
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -38,8 +42,42 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //logic to execute text watcher
+        textUsernameLayout
+                .getEditText()
+                .addTextChangedListener(createTextWatcher(textUsernameLayout));
+
+        textPasswordInput
+                .getEditText()
+                .addTextChangedListener(createTextWatcher(textPasswordInput));
+
 
     }
+
+
+
+    //text watcher that, uh watches out for changes in input field
+    private TextWatcher createTextWatcher(TextInputLayout textPasswordInput) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //not needed
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                textPasswordInput.setError(null); //clears the error message when text is added
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //not needed
+            }
+
+        };
+    }
+
+
 
     //validation and error messages
     private void onLoginClicked() {
@@ -54,8 +92,25 @@ public class LoginActivity extends AppCompatActivity {
 
         } else if (password.isEmpty()) {
             textPasswordInput.setError("Password must not be empty");
+        } else if (!username.equals("admin") && !password.equals("admin")) {
+
+            showErrorDialog();
+
         }
 
     }
+
+
+
+
+    private void showErrorDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Login Failed")
+                .setMessage("Username or password is not correct. Please try again.")
+                .setPositiveButton("Ok", (dialog, which) -> dialog.dismiss())
+                .show();
+    }
+
+
 
 }

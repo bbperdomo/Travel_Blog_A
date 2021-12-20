@@ -29,10 +29,20 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.appcompat:appcompat:1.4.0' //makes apps developed with newer versions work with older ones
+    implementation 'com.google.android.material:material:1.4.0' //brings material design components to android
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2' //allows creating large and complex layouts with a flat view heirarchy
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+//    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+//    implementation 'com.google.android.material:material:1.1.0-alpha10'
+
+    //future library definitions
+//    retrofit - a type-safe HTTP client library
+//    moshi - a JSON parser library
+//    glide - an image loading library
+//    room - an official Android ORM database
+//    dagger - a static, compile-time dependency injection framework
 }

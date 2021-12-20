@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--    xmlns:android and xmlns:app attributes defines XML namespace, android namespace for attributes -->
+<!--    from Android SDK and app namespace for attributes from libraries-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +9,26 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+<!--    textview is the component that renders text
+        EditText is an input field component where users can type text
+        These are known as "views" or "widgets"
+        Layouts are built via views
+        Viewgroups are also known as layouts. Constraintlayout is a layout, or viewgroup
+
+
+        This layout comes as a separate library and uses constraints to position views on the screen.
+        The ConstraintLayout is more complicated than Android SDK view groups, but it has a rich visual editor
+        to help build the user interface and in most cases has better performance.While we can create a layout in Java code,
+        it’s easier to build a layout in the XML file and then inflate (bind) this layout to a specific activity.-->
+
+
+
+<!--    layout_constraintTop_toTopOf attribute declares a constraint to align the top of the view to the top of the ConstraintLayout-->
+<!--    layout_constraintBottom_toBottomOf attribute declares a constraint to align the bottom of the view to the bottom of the ConstraintLayout-->
+<!--    layout_constraintLeft_toLeftOf attribute declares a constraint to align the left of the view to the left of the ConstraintLayout-->
+<!--    layout_constraintRight_toRightOf attribute declares a constraint to align the right of the view to the right of the ConstraintLayout-->
     <TextView
+        android:id="@+id/mainTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello Github!"

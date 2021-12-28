@@ -17,15 +17,28 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //data validation variables
     private TextInputLayout textUsernameLayout;
     private TextInputLayout textPasswordInput;
     private Button loginButton;
     private ProgressBar progressBar;
 
+    //shared preferences
+    private BlogPreferences preferences;
+
     @Override //added later
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+
+        preferences = new BlogPreferences(this); //creates a shared preference, calls constructor
+        if (preferences.isLoggedIn()) { //If isloggedin returns a login_state(true), start main activity
+            startMainActivity();
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_login); //connects LoginActivity to activity_login.xml
 
         //binding views from xml to java objects using "findViewById()" method

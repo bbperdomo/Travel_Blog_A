@@ -5,4 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <!--constraint* constrains view to the top,left, and right of parent-->
+
+    <ImageView
+        android:id="@+id/imageMain"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:src="@drawable/Thun"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

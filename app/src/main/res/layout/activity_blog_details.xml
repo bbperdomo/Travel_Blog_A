@@ -5,16 +5,67 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+<!--    ImageView will hold the image of a travel destination-->
     <!--constraint* constrains view to the top,left, and right of parent-->
-
+<!--    imageView is centered by default, we use scaleType with centerCrop value to fill out the entire view -->
     <ImageView
         android:id="@+id/imageMain"
         android:layout_width="0dp"
         android:layout_height="250dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/Thun"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+<!--    this is the textview to display the date of the blog entry-->
+<!--    the style value is a custom text style from the material design library-->
+<!--    im guessing the layout_margin values specify exact pixel positions from the parent to be placed-->
+<!--    the shadow attributes set a text shadow position and radius-->
+<!--    the layout constraints and margins constrain the date to the bottom left corner of the parent image-->
+    <TextView
+        android:id="@id/textDate"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="January 11th, 2022'"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+<!--    this is the textview that displays the title of the blog entry-->
+<!--    layout_constraintBottom_totopOf: this connects the bottom of this textview to the TOP of the TextDate textview,-->
+<!--    it connects the bottom of the title to the top of the date-->
+
+    <TextView
+        android:id="@+id/textTitle"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="Singin' tunes in Thun"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+<!--    ***This is the section that defines the author, description and rating sections***-->
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

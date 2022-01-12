@@ -36,6 +36,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.github.bumptech.glide:glide:4.10.0' //image loader library
+    implementation 'com.squareup.okhttp3:okhttp:4.2.1'  //Java http client, loads data from internet
+    implementation 'com.google.code.gson:gson:2.8.7'    //converts  JSON objects to Java objects
+
 
 //    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 //    implementation 'com.google.android.material:material:1.1.0-alpha10'

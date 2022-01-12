@@ -8,7 +8,17 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+
 public class BlogDetailsActivity extends AppCompatActivity {
+
+    //samples images
+    public static final String IMAGE_URL =
+            "https://www.myglobalviewpoint.com/wp-content/uploads/2020/01/Thun-Beautiful-Places-in-Switzerland.jpg";
+    public static final String AVATAR_URL =
+            "https://s.hs-data.com/bilder/spieler/gross/20292.jpg?fallback=png";
+
+
 
     //protected is an access modifier for the onCreate method, means it can be accessed within the class itself, and through object references.
 
@@ -19,10 +29,17 @@ public class BlogDetailsActivity extends AppCompatActivity {
 
 
         ImageView imageMain = findViewById(R.id.imageMain);
-        imageMain.setImageResource(R.drawable.thun_pic);
+        //imageMain.setImageResource(R.drawable.thun_pic);
+        //Code below loads images from the urls specified above
+        Glide.with(this)
+                .load(IMAGE_URL)
+                .into(imageMain);
 
         ImageView imageAvatar = findViewById(R.id.imageAvatar);
-        imageAvatar.setImageResource(R.drawable.marc_schneider);
+        //imageAvatar.setImageResource(R.drawable.avatar);
+        Glide.with(this)
+                .load(AVATAR_URL)
+                .into(imageAvatar);
 
         TextView textTitle = findViewById(R.id.textTitle);
         textTitle.setText("Singing tunes in Thun");
@@ -48,5 +65,10 @@ public class BlogDetailsActivity extends AppCompatActivity {
 
         ImageView imageBack = findViewById(R.id.imageBack);
         imageBack.setOnClickListener(v -> finish());
+
+
+
+
+
     }
 }

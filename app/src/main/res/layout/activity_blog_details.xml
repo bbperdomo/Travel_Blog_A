@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/thun_pic"
+        tools:src="@drawable/thun_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +35,7 @@
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="2"
-        android:text="January 11th, 2022'"
+        tools:text="January 11th, 2022'"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/imageMain"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +56,7 @@
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="2"
-        android:text="Singin' tunes in Thun"
+        tools:text="Singin' tunes in Thun"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textDate"
@@ -79,7 +80,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/marc_schneider"
+        tools:src="@drawable/marc_schneider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageMain" />
 
@@ -93,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Marc Schneider"
+        tools:text="Marc Schneider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageAvatar"
         app:layout_constraintTop_toTopOf="@+id/imageAvatar" />
@@ -107,7 +108,7 @@
         android:layout_marginStart="16dp"
         android:isIndicator="true"
         android:numStars="5"
-        android:rating="4.4"
+        tools:rating="4.4"
         android:stepSize="0.1"
         app:layout_constraintBottom_toBottomOf="@+id/imageAvatar"
         app:layout_constraintStart_toEndOf="@+id/imageAvatar"
@@ -121,7 +122,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="4.4"
+        tools:text="4.4"
         app:layout_constraintBottom_toBottomOf="@id/ratingBar"
         app:layout_constraintStart_toEndOf="@id/ratingBar"
         app:layout_constraintTop_toTopOf="@+id/ratingBar" />
@@ -132,7 +133,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
-        android:text="(1459 views)"
+        tools:text="(1459 views)"
         android:textColor="@color/grey500"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
         app:layout_constraintStart_toEndOf="@id/textRating"
@@ -154,7 +155,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
-        android:text="The name of the city derives from the Celtic term Dunum, meaning “fortified city”."
+        tools:text="The name of the city derives from the Celtic term Dunum, meaning “fortified city”."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageAvatar" />

@@ -150,7 +150,8 @@
         android:layout_height="48dp"
         android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_white_24dp"/>
 
     <TextView
         android:id="@+id/textDescription"

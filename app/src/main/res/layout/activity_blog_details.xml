@@ -6,6 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+<!--    implemented tools library for text, src, and rating, which enables design time features, -->
+<!--    meaning the attributes are removed during compilation-->
+
+
+
 <!--    ImageView will hold the image of a travel destination-->
     <!--constraint* constrains view to the top,left, and right of parent-->
 <!--    imageView is centered by default, we use scaleType with centerCrop value to fill out the entire view -->

@@ -26,7 +26,11 @@ public class Blog {
         return image;
     }
 
-    public String getViews() {
+    public String getDescription() {
+        return description;
+    }
+
+    public int getViews() {
         return views;
     }
 
@@ -47,4 +51,3 @@ public class Blog {
     }
 }
 
-}

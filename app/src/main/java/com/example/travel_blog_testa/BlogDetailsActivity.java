@@ -23,6 +23,7 @@ public class BlogDetailsActivity extends AppCompatActivity {
 
 
     //protected is an access modifier for the onCreate method, means it can be accessed within the class itself, and through object references.
+    //testing branch
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

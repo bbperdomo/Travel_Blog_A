@@ -23,6 +23,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -68,8 +69,8 @@ public final class BlogHttpClient {
 
     }
 
-
-    public void loadBlogArticles() {
+    //the calling class will pass BlogArticlesCallBack into this load articles method
+    public void loadBlogArticles(BlogArticlesCallBack callback) {
 
         //request object, it defines the type of request and url
         Request request = new Request.Builder() //1
@@ -95,7 +96,9 @@ public final class BlogHttpClient {
                     BlogData blogData = gson.fromJson(json, BlogData.class);
 
                     if (blogData != null) {
+
                         //
+                        callback.onSuccess(blogData.getData());
                         return;
                     }
                 }
@@ -103,8 +106,16 @@ public final class BlogHttpClient {
             } catch (IOException e) {
                 Log.e("BlogHttpClient", "Error loading blog articles", e);
             }
+            callback.onError();
 
         });
+    }
+
+    //call back listener, which delivers the result to the calling class
+    //onSuccess returns a list of blog articles, and onError delivers an error
+    public interface BlogArticlesCallBack {
+        void onSuccess(List<Blog> blogList);
+        void onError();
     }
 
 }

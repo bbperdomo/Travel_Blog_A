@@ -1,7 +1,9 @@
 package com.example.travel_blog_testa;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -29,6 +31,8 @@ public class BlogDetailsActivity extends AppCompatActivity {
     private ImageView imageAvatar;
     private ImageView imageMain;
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,9 @@ public class BlogDetailsActivity extends AppCompatActivity {
         textViews = findViewById(R.id.textViews);
         textDescription = findViewById(R.id.textDescription);
         ratingBar = findViewById(R.id.ratingBar);
+
+        //binds progressBar view from xml to this Class
+        progressBar = findViewById(R.id.progressBar);
 
         loadData();
     }
@@ -71,6 +78,7 @@ public class BlogDetailsActivity extends AppCompatActivity {
     }
 
     private void showData(Blog blog) {
+        progressBar.setVisibility(View.GONE); //hides progress bar
         textTitle.setText(blog.getTitle());
         textDate.setText(blog.getDate());
         textAuthor.setText(blog.getAuthor().getName());

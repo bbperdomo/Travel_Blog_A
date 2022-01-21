@@ -16,6 +16,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.example.travel_blog_testa.http.Blog;
 import com.example.travel_blog_testa.http.BlogHttpClient;
 import com.example.travel_blog_testa.http.BlogArticlesCallback;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class BlogDetailsActivity extends AppCompatActivity {
     }
 
 
-    //Class that triggers BlogHttpClient methods
+    //Class that triggers BlogHttpClient methods and returns a list of blog articles
     private void loadData() {
         BlogHttpClient.INSTANCE.loadBlogArticles(new BlogArticlesCallback() {
             @Override
@@ -73,10 +74,14 @@ public class BlogDetailsActivity extends AppCompatActivity {
             @Override
             public void onError() {
                 // handle error
+                runOnUiThread(() -> showErrorSnackbar());
+
             }
         });
     }
 
+
+    //displays blog articles to screen
     private void showData(Blog blog) {
         progressBar.setVisibility(View.GONE); //hides progress bar
         textTitle.setText(blog.getTitle());
@@ -97,6 +102,22 @@ public class BlogDetailsActivity extends AppCompatActivity {
                 .transform(new CircleCrop())
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(imageAvatar);
+    }
+
+    //snack bar is a component from the materials library
+    private void showErrorSnackbar() {
+
+        View rootView = findViewById(android.R.id.content);
+
+        Snackbar snackbar = Snackbar.make(rootView,
+                "Error during loading blog articles", Snackbar.LENGTH_INDEFINITE);
+        snackbar.setActionTextColor(getResources().getColor(R.color.orange500));
+        snackbar.setAction("Retry", v -> {
+            loadData();
+            snackbar.dismiss();
+
+        });
+        snackbar.show();
     }
 
 }

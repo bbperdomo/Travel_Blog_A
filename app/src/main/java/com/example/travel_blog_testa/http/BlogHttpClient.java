@@ -69,11 +69,14 @@ public final class BlogHttpClient {
 
     }
 
-    //the calling class will pass BlogArticlesCallBack into this load articles method
-    public void loadBlogArticles(BlogArticlesCallBack callback) {
+    //The calling class will pass BlogArticlesCallBack into this load articles method
+    /* loadData IS THE CALLING CLASS */
+    //I think "callback" is an object of type BACallback, is used to reference its interface's methods
+    public void loadBlogArticles(BlogArticlesCallback callback) {
 
         //request object, it defines the type of request and url
-        Request request = new Request.Builder() //1
+        //builds an okhttp GET request
+        Request request = new Request.Builder()
         .get()
         .url(BLOG_ARTICLES_URL)
         .build();
@@ -82,22 +85,29 @@ public final class BlogHttpClient {
         //i think we're using the executor object defined above with the fixed thread pool
         executor.execute(() -> {
             try {
-                //executing OkHttp method newCall using request to retrieve a  json response
+                //executing OkHttp method newCall using request to retrieve a json response
+                //client is the OkHttp object
                 Response response = client.newCall(request).execute();
+
                 //Once we retrieve the response, we use body() to get the body of the response
                 ResponseBody responseBody = response.body();
 
                 //check to see if we got a non-empty response
                 if (responseBody != null) {
+
                     //transforms responseBody into a string(), which is an OkHttp method
                     String json = responseBody.string();
+
                     //converts the string of the json response body into an object of type BlogData
                     //DeSerializes json into Object
+                    //which means, i think, that the json is converted into a list of data?
                     BlogData blogData = gson.fromJson(json, BlogData.class);
 
+                    //if we retrieved some info...
                     if (blogData != null) {
 
-                        //
+                        //i think we passed the results returned from getData() (which is a list i think) into onSuccess
+                        //onSuccess specifically takes a List object as a parameter
                         callback.onSuccess(blogData.getData());
                         return;
                     }
@@ -111,11 +121,5 @@ public final class BlogHttpClient {
         });
     }
 
-    //call back listener, which delivers the result to the calling class
-    //onSuccess returns a list of blog articles, and onError delivers an error
-    public interface BlogArticlesCallBack {
-        void onSuccess(List<Blog> blogList);
-        void onError();
-    }
 
 }

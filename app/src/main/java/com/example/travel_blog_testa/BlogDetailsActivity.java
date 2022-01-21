@@ -14,12 +14,16 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 public class BlogDetailsActivity extends AppCompatActivity {
 
-    //samples images
-    public static final String IMAGE_URL =
-            "https://www.myglobalviewpoint.com/wp-content/uploads/2020/01/Thun-Beautiful-Places-in-Switzerland.jpg";
-    public static final String AVATAR_URL =
-            "https://s.hs-data.com/bilder/spieler/gross/20292.jpg?fallback=png";
 
+    private TextView textTitle;
+    private TextView textDate;
+    private TextView textAuthor;
+    private TextView textRating;
+    private TextView textDescription;
+    private TextView textViews;
+    private RatingBar ratingBar;
+    private ImageView imageAvatar;
+    private ImageView imageMain;
 
 
     //protected is an access modifier for the onCreate method, means it can be accessed within the class itself, and through object references.
@@ -32,20 +36,8 @@ public class BlogDetailsActivity extends AppCompatActivity {
 
 
         ImageView imageMain = findViewById(R.id.imageMain);
-        //imageMain.setImageResource(R.drawable.thun_pic);
-        //Code below loads images from the urls specified above
-        Glide.with(this)
-                .load(IMAGE_URL)
-                .transition(DrawableTransitionOptions.withCrossFade())  //phase in animation
-                .into(imageMain);
-
         ImageView imageAvatar = findViewById(R.id.imageAvatar);
-        //imageAvatar.setImageResource(R.drawable.avatar);
-        Glide.with(this)
-                .load(AVATAR_URL)
-                .transform(new CircleCrop())    //changes square image to circle, built in glide function
-                .transition(DrawableTransitionOptions.withCrossFade())  //phase in animation
-                .into(imageAvatar);
+
 
         //code below hooks up layout views to this activity so they can be displayed
         TextView textTitle = findViewById(R.id.textTitle);

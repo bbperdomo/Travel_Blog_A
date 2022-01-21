@@ -11,9 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.travel_blog_testa.http.Blog;
+import com.example.travel_blog_testa.http.BlogHttpClient;
+import com.example.travel_blog_testa.http.BlogArticlesCallback;
+
+import java.util.List;
 
 public class BlogDetailsActivity extends AppCompatActivity {
-
 
     private TextView textTitle;
     private TextView textDate;
@@ -25,15 +29,10 @@ public class BlogDetailsActivity extends AppCompatActivity {
     private ImageView imageAvatar;
     private ImageView imageMain;
 
-
-    //protected is an access modifier for the onCreate method, means it can be accessed within the class itself, and through object references.
-    //testing branch
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog_details);
-
 
         imageMain = findViewById(R.id.imageMain);
         imageAvatar = findViewById(R.id.imageAvatar);
@@ -41,29 +40,55 @@ public class BlogDetailsActivity extends AppCompatActivity {
         ImageView imageBack = findViewById(R.id.imageBack);
         imageBack.setOnClickListener(v -> finish());
 
-
-        //code below hooks up layout views to this activity so they can be displayed
         textTitle = findViewById(R.id.textTitle);
-
         textDate = findViewById(R.id.textDate);
-
         textAuthor = findViewById(R.id.textAuthor);
-
         textRating = findViewById(R.id.textRating);
-
         textViews = findViewById(R.id.textViews);
-
         textDescription = findViewById(R.id.textDescription);
-
         ratingBar = findViewById(R.id.ratingBar);
 
-
-//        //load data
-//        loadData();
-
-
-
-
-
+        loadData();
     }
+
+
+    //Class that triggers BlogHttpClient methods
+    private void loadData() {
+        BlogHttpClient.INSTANCE.loadBlogArticles(new BlogArticlesCallback() {
+            @Override
+
+            //BlogArticleCallback interfaces methods are called
+            public void onSuccess(List<Blog> blogList) {
+                //if loadBlogArticles was successful, display data, also run on main thread
+                runOnUiThread(() -> showData(blogList.get(0)));
+            }
+
+            @Override
+            public void onError() {
+                // handle error
+            }
+        });
+    }
+
+    private void showData(Blog blog) {
+        textTitle.setText(blog.getTitle());
+        textDate.setText(blog.getDate());
+        textAuthor.setText(blog.getAuthor().getName());
+        textRating.setText(String.valueOf(blog.getRating()));
+        textViews.setText(String.format("(%d views)", blog.getViews()));
+        textDescription.setText(blog.getDescription());
+        ratingBar.setRating(blog.getRating());
+
+        Glide.with(this)
+                .load(blog.getImage())
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageMain);
+
+        Glide.with(this)
+                .load(blog.getAuthor().getAvatar())
+                .transform(new CircleCrop())
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageAvatar);
+    }
+
 }

@@ -1,7 +1,9 @@
 package com.example.travel_blog_testa;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -11,70 +13,90 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.example.travel_blog_testa.http.Blog;
+import com.example.travel_blog_testa.http.BlogHttpClient;
+import com.example.travel_blog_testa.http.BlogArticlesCallback;
+
+import java.util.List;
 
 public class BlogDetailsActivity extends AppCompatActivity {
 
-    //samples images
-    public static final String IMAGE_URL =
-            "https://www.myglobalviewpoint.com/wp-content/uploads/2020/01/Thun-Beautiful-Places-in-Switzerland.jpg";
-    public static final String AVATAR_URL =
-            "https://s.hs-data.com/bilder/spieler/gross/20292.jpg?fallback=png";
+    private TextView textTitle;
+    private TextView textDate;
+    private TextView textAuthor;
+    private TextView textRating;
+    private TextView textDescription;
+    private TextView textViews;
+    private RatingBar ratingBar;
+    private ImageView imageAvatar;
+    private ImageView imageMain;
 
-
-
-    //protected is an access modifier for the onCreate method, means it can be accessed within the class itself, and through object references.
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog_details);
 
-
-        ImageView imageMain = findViewById(R.id.imageMain);
-        //imageMain.setImageResource(R.drawable.thun_pic);
-        //Code below loads images from the urls specified above
-        Glide.with(this)
-                .load(IMAGE_URL)
-                .transition(DrawableTransitionOptions.withCrossFade())  //phase in animation
-                .into(imageMain);
-
-        ImageView imageAvatar = findViewById(R.id.imageAvatar);
-        //imageAvatar.setImageResource(R.drawable.avatar);
-        Glide.with(this)
-                .load(AVATAR_URL)
-                .transform(new CircleCrop())    //changes square image to circle, built in glide function
-                .transition(DrawableTransitionOptions.withCrossFade())  //phase in animation
-                .into(imageAvatar);
-
-        //code below hooks up layout views to this activity so they can be displayed
-        TextView textTitle = findViewById(R.id.textTitle);
-        textTitle.setText("Singing tunes in Thun");
-
-        TextView textDate = findViewById(R.id.textDate);
-        textDate.setText("January 11th, 2022");
-
-        TextView textAuthor = findViewById(R.id.textAuthor);
-        textAuthor.setText("Marc Schneider");
-
-        TextView textRating = findViewById(R.id.textRating);
-        textRating.setText("4.4");
-
-        TextView textViews = findViewById(R.id.textViews);
-        textViews.setText("(1459 views)");
-
-        TextView textDescription = findViewById(R.id.textDescription);
-        textDescription.setText("The name of the city derives from the Celtic term Dunum, meaning “fortified city.");
-
-        RatingBar ratingBar = findViewById(R.id.ratingBar);
-        ratingBar.setRating(4.4f);
-
+        imageMain = findViewById(R.id.imageMain);
+        imageAvatar = findViewById(R.id.imageAvatar);
 
         ImageView imageBack = findViewById(R.id.imageBack);
         imageBack.setOnClickListener(v -> finish());
 
+        textTitle = findViewById(R.id.textTitle);
+        textDate = findViewById(R.id.textDate);
+        textAuthor = findViewById(R.id.textAuthor);
+        textRating = findViewById(R.id.textRating);
+        textViews = findViewById(R.id.textViews);
+        textDescription = findViewById(R.id.textDescription);
+        ratingBar = findViewById(R.id.ratingBar);
 
+        //binds progressBar view from xml to this Class
+        progressBar = findViewById(R.id.progressBar);
 
-
-
+        loadData();
     }
+
+
+    //Class that triggers BlogHttpClient methods
+    private void loadData() {
+        BlogHttpClient.INSTANCE.loadBlogArticles(new BlogArticlesCallback() {
+            @Override
+
+            //BlogArticleCallback interfaces methods are called
+            public void onSuccess(List<Blog> blogList) {
+                //if loadBlogArticles was successful, display data, also run on main thread
+                runOnUiThread(() -> showData(blogList.get(0)));
+            }
+
+            @Override
+            public void onError() {
+                // handle error
+            }
+        });
+    }
+
+    private void showData(Blog blog) {
+        progressBar.setVisibility(View.GONE); //hides progress bar
+        textTitle.setText(blog.getTitle());
+        textDate.setText(blog.getDate());
+        textAuthor.setText(blog.getAuthor().getName());
+        textRating.setText(String.valueOf(blog.getRating()));
+        textViews.setText(String.format("(%d views)", blog.getViews()));
+        textDescription.setText(blog.getDescription());
+        ratingBar.setRating(blog.getRating());
+
+        Glide.with(this)
+                .load(blog.getImage())
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageMain);
+
+        Glide.with(this)
+                .load(blog.getAuthor().getAvatar())
+                .transform(new CircleCrop())
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageAvatar);
+    }
+
 }

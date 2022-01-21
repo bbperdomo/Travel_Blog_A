@@ -12,6 +12,8 @@ public class BlogData {
     private List<Blog> data;
 
     public List<Blog> getData() {
+
+        //basically says, "if data passed in is not empty, return the list of blog article data
         return data != null ? data : new ArrayList<Blog>();
     }
 

@@ -1,6 +1,8 @@
 package com.example.travel_blog_testa;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -18,5 +20,7 @@ public class MainActivity extends AppCompatActivity {
         //Then you use the findviewbyid method
         TextView maintextView = findViewById(R.id.mainTextView);
         maintextView.setText("Hello Earth");
+
+        startActivity(new Intent(this, BlogDetailsActivity.class));
     }
 }

@@ -6,8 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
 <!--    textview is the component that renders text
         EditText is an input field component where users can type text
@@ -27,14 +26,42 @@
 <!--    layout_constraintBottom_toBottomOf attribute declares a constraint to align the bottom of the view to the bottom of the ConstraintLayout-->
 <!--    layout_constraintLeft_toLeftOf attribute declares a constraint to align the left of the view to the left of the ConstraintLayout-->
 <!--    layout_constraintRight_toRightOf attribute declares a constraint to align the right of the view to the right of the ConstraintLayout-->
-    <TextView
-        android:id="@+id/mainTextView"
-        android:layout_width="wrap_content"
+
+
+<!-- layout consists of two elements: toolbar and a list -->
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello Github!"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Travel Blog"
+            app:titleTextColor="@android:color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+<!--view that renders a list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        tools:listitem="@layout/item_main"
+        />
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

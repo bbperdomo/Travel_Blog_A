@@ -49,5 +49,10 @@ public class Blog {
     public String getId() {
         return id;
     }
+
+    //returns full image url
+    public String getImageURL() {
+        return BlogHttpClient.BASE_URL + BlogHttpClient.PATH + getImage();
+    }
 }
 
